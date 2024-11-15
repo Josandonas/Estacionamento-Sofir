@@ -1,4 +1,4 @@
-# Bem Vindo ao :city_sunset: Estacionamento Sofir :ticket:
+# :city_sunset: Estacionamento Sofir :ticket:
 
 ```bash
 cd backend
@@ -24,7 +24,7 @@ npm run dev
 
 * laravel/jwt com o intuito de validar o token de login
 
-## Pacotes front-end
+## Pacotes front-end:
 * react-fontawesome para os icones do projeto
 * bootstrap responsividade e fácil criação de layouts por meio de classes
 * axios foi usado por dar suporte nativo para json e com ele é mais fácil realizar requisições http usando os metodos: get, post, put, delete e outros
