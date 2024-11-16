@@ -7,59 +7,72 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Método para listar todos os clientes
     public function index()
     {
-        //
+        return response()->json(Cliente::all());
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'cpf' => 'required|string|size:11|unique:cliente',
+            'telefone' => 'required|string|max:15',
+        ]);
+
+        $cliente = Cliente::create([
+            'nome' => $request->nome,
+            'cpf' => $request->cpf,
+            'telefone' => $request->telefone,
+            'status' => true, // Define o status padrão como ativo
+        ]);
+
+        return response()->json(['message' => 'Cliente criado com sucesso', 'cliente' => $cliente], 201);
+    }
+    // Método para buscar um cliente específico
+    public function show($id)
+    {
+        $cliente = Cliente::find($id);
+
+        if (!$cliente) {
+            return response()->json(['error' => 'Cliente não encontrado'], 404);
+        }
+
+        return response()->json($cliente);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Cliente $cliente)
+    // Metodo de edicao
+    public function update(Request $request, $id)
     {
-        //
+        $cliente = Cliente::find($id);
+
+        if (!$cliente) {
+            return response()->json(['error' => 'Cliente não encontrado'], 404);
+        }
+
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'cpf' => 'required|string|size:11|unique:cliente',
+            'telefone' => 'required|string|max:15',
+        ]);
+
+        $cliente->update($request->all());
+
+        return response()->json(['message' => 'Cliente atualizado com sucesso', 'cliente' => $cliente]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Cliente $cliente)
+    //Metodo que atualiza o cliente
+    public function updateStatus($id)
     {
-        //
-    }
+        $cliente = Cliente::find($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Cliente $cliente)
-    {
-        //
-    }
+        if (!$cliente) {
+            return response()->json(['error' => 'Cliente não encontrado'], 404);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Cliente $cliente)
-    {
-        //
+        $cliente->status = !$cliente->status;
+        $cliente->save();
+
+        return response()->json(['message' => 'Status atualizado com sucesso', 'cliente' => $cliente]);
     }
 }

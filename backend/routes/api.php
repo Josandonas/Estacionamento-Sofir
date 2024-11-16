@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -19,3 +20,10 @@ use Illuminate\Support\Facades\Auth;
 Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:api')->post('/logout', [AuthController::class, 'logout']);
 Route::middleware('auth:api')->get('/user', [AuthController::class, 'user']);
+
+// Rotas Clientes
+Route::get('/clientes', [ClienteController::class, 'index']); // Lista todos os clientes
+Route::post('/clientes', [ClienteController::class, 'store']); // Criar clientes
+Route::get('/clientes/{id}', [ClienteController::class, 'show']); // Busca um cliente específico
+Route::put('/clientes/{id}', [ClienteController::class, 'update']); // Atualiza os dados do cliente
+Route::put('/clientes/{id}/status', [ClienteController::class, 'updateStatus']); // Alterna o status do cliente

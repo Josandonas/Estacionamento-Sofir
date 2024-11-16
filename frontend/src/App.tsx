@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'r
 import Login from './components/Login';
 import Home from './components/Home';
 import Dashboard from './components/Dashboard';
-import Clientes from './components/Clientes';
+import Clientes from './components/Clientes/Clientes';
 import Carros from './components/Carros';
 import Tickets from './components/Tickets';
 import Vagas from './components/Vagas';
