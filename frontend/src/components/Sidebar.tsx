@@ -1,9 +1,15 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCar, faTicketAlt, faParking, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+        navigate('/login');
+    };
     return (
         <div className="d-flex flex-column vh-100" style={{ backgroundColor: '#f8f9fa' }}>
             <h2 className="text-center mt-3">Dashboard</h2>
@@ -22,7 +28,7 @@ const Sidebar: React.FC = () => {
                 </Link>
             </div>
             <div className="px-3 pb-3">
-                <button className="btn btn-danger w-100">
+                <button className="btn btn-danger w-100" onClick={handleLogout}>
                     <FontAwesomeIcon icon={faSignOutAlt} /> Sair
                 </button>
             </div>
