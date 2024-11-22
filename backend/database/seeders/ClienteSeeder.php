@@ -16,14 +16,14 @@ class ClienteSeeder extends Seeder
             [
                 'id'=> '25',
                 'nome' => 'Wandesley Firulai',
-                'cpf' => '64690623180',
+                'cpf' => '786.671.150-02',
                 'telefone' => '(67) 98765-4321',
                 'status' => true,
             ],
             [
                 'id'=> '57',
                 'nome' => 'Maria Francisca',
-                'cpf' => '65223626192',
+                'cpf' => '296.093.700-71',
                 'telefone' => '(67) 91234-5678',
                 'status' => false,
             ],

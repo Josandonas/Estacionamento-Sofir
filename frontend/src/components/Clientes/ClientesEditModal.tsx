@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import api from '../../api';
+import { formatCpf, formatPhone } from '../../utils/formattings';
+import { isValidCpf, isValidPhone } from '../../utils/validations';
 
 interface ClientesEditModalProps {
     cliente: {
@@ -16,11 +18,39 @@ const ClientesEditModal: React.FC<ClientesEditModalProps> = ({ cliente, onClose,
     const [nome, setNome] = useState(cliente.nome);
     const [cpf, setCpf] = useState(cliente.cpf);
     const [telefone, setTelefone] = useState(cliente.telefone);
+    const [errors, setErrors] = useState<{ cpf?: string; telefone?: string }>({});
+
+    const handleCpfChange = (value: string) => {
+        const formattedCpf = formatCpf(value);
+        setCpf(formattedCpf);
+        setErrors((prev) => ({
+            ...prev,
+            cpf: isValidCpf(formattedCpf) ? undefined : 'CPF inválido.',
+        }));
+    };
+
+    const handlePhoneChange = (value: string) => {
+        const formattedPhone = formatPhone(value);
+        setTelefone(formattedPhone);
+        setErrors((prev) => ({
+            ...prev,
+            telefone: isValidPhone(formattedPhone) ? undefined : 'Número de telefone inválido.',
+        }));
+    };
 
     const handleSave = async () => {
-        await api.put(`/clientes/${cliente.id}`, { nome, cpf, telefone });
-        onUpdate();
-        onClose();
+        if (errors.cpf || errors.telefone) {
+            alert('Corrija os erros antes de salvar.');
+            return;
+        }
+
+        try {
+            await api.put(`/clientes/${cliente.id}`, { nome, cpf, telefone });
+            onUpdate();
+            onClose();
+        } catch (error) {
+            console.error('Erro ao atualizar cliente:', error);
+        }
     };
 
     return (
@@ -32,7 +62,7 @@ const ClientesEditModal: React.FC<ClientesEditModalProps> = ({ cliente, onClose,
                         <button
                             type="button"
                             className="btn btn-danger"
-                            style={{ position: 'absolute', top: '10px', right: '10px'}}
+                            style={{ position: 'absolute', top: '10px', right: '10px' }}
                             onClick={onClose}
                             aria-label="Close"
                         >
@@ -49,22 +79,28 @@ const ClientesEditModal: React.FC<ClientesEditModalProps> = ({ cliente, onClose,
                         />
                         <input
                             type="text"
-                            className="form-control mb-2"
+                            className={`form-control mb-2 ${errors.cpf ? 'is-invalid' : ''}`}
                             placeholder="CPF"
                             value={cpf}
-                            onChange={(e) => setCpf(e.target.value)}
+                            onChange={(e) => handleCpfChange(e.target.value)}
                         />
+                        {errors.cpf && <div className="invalid-feedback">{errors.cpf}</div>}
                         <input
                             type="text"
-                            className="form-control mb-2"
+                            className={`form-control mb-2 ${errors.telefone ? 'is-invalid' : ''}`}
                             placeholder="Telefone"
                             value={telefone}
-                            onChange={(e) => setTelefone(e.target.value)}
+                            onChange={(e) => handlePhoneChange(e.target.value)}
                         />
+                        {errors.telefone && <div className="invalid-feedback">{errors.telefone}</div>}
                     </div>
                     <div className="modal-footer">
-                        <button className="btn btn-secondary" onClick={onClose}>Cancelar</button>
-                        <button className="btn btn-primary" onClick={handleSave}>Salvar</button>
+                        <button className="btn btn-secondary" onClick={onClose}>
+                            Cancelar
+                        </button>
+                        <button className="btn btn-primary" onClick={handleSave}>
+                            Salvar
+                        </button>
                     </div>
                 </div>
             </div>

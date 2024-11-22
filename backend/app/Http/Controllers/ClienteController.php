@@ -16,8 +16,8 @@ class ClienteController extends Controller
     {
         $request->validate([
             'nome' => 'required|string|max:255',
-            'cpf' => 'required|string|size:11|unique:cliente',
-            'telefone' => 'required|string|max:15',
+            'cpf' => 'required|string|max:16|unique:cliente',
+            'telefone' => 'required|string|max:20',
         ]);
 
         $cliente = Cliente::create([
@@ -52,8 +52,8 @@ class ClienteController extends Controller
 
         $request->validate([
             'nome' => 'required|string|max:255',
-            'cpf' => 'required|string|size:11|unique:cliente',
-            'telefone' => 'required|string|max:15',
+            'cpf' => 'required|string|max:16|unique:cliente',
+            'telefone' => 'required|string|max:20',
         ]);
 
         $cliente->update($request->all());

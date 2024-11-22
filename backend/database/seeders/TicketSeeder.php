@@ -14,7 +14,7 @@ class TicketSeeder extends Seeder
     {
         DB::table('ticket')->insert([
             [
-                'nome_cliente' => '64690623180',
+                'nome_cliente' => '786.671.150-02',
                 'placa_carro' => 'HSO3373',
                 'tipo_vaga' => 'Publico',
                 'tipo_estadia' => 'Temporario',
@@ -26,7 +26,7 @@ class TicketSeeder extends Seeder
                 'estadia_id' => 1,
             ],
             [
-                'nome_cliente' => '64690623180',
+                'nome_cliente' => '786.671.150-02',
                 'placa_carro' => 'HQK9530',
                 'tipo_vaga' => 'Publico',
                 'tipo_estadia' => 'Temporario',

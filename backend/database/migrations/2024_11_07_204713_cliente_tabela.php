@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome');        
             $table->string('cpf')->unique();
-            $table->string('telefone',15);
+            $table->string('telefone',20);
             $table->boolean('status');
         });
     }
