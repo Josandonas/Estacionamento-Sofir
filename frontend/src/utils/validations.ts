@@ -27,3 +27,17 @@ export const isValidPhone = (phone: string): boolean => {
     const regex = /^\+\d{1,3}\s\(\d{1,3}\)\s\d{4,5}-\d{4}$/;
     return regex.test(phone);
 };
+
+/**
+ * Valida uma placa brasileira no formato antigo (ABC-1234)
+ * ou no formato Mercosul (ABC1D23).
+ *
+ * @param placa - A placa a ser validada.
+ * @returns True se a placa for válida, False caso contrário.
+ */
+
+export const validarPlacaBrasileira = (placa: string): boolean => {
+    const regexAntiga = /^[A-Z]{3}-\d{4}$/; // Ex: ABC-1234
+    const regexMercosul = /^[A-Z]{3}\d[A-Z]\d{2}$/; // Ex: ABC1D23
+    return regexAntiga.test(placa) || regexMercosul.test(placa);
+};

@@ -7,11 +7,12 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
-    // Método para listar todos os clientes
+    
     public function index()
     {
         return response()->json(Cliente::all());
     }
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -52,7 +53,7 @@ class ClienteController extends Controller
 
         $request->validate([
             'nome' => 'required|string|max:255',
-            'cpf' => 'required|string|max:16|unique:cliente',
+            'cpf' => 'required|string|max:16|unique:cliente,cpf'.$id,
             'telefone' => 'required|string|max:20',
         ]);
 
@@ -61,7 +62,7 @@ class ClienteController extends Controller
         return response()->json(['message' => 'Cliente atualizado com sucesso', 'cliente' => $cliente]);
     }
 
-    //Metodo que atualiza o cliente
+    //Metodo que atualiza o  status do cliente
     public function updateStatus($id)
     {
         $cliente = Cliente::find($id);

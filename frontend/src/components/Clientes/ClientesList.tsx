@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import ClienteCard from './ClientesCard';
+import ClientesCard from './ClientesCard';
 import ClientesCreateModal from './ClientesCreateModal';
 import api from '../../api';
 
@@ -37,7 +37,7 @@ const ClientesList: React.FC = () => {
             <div className="row">
                 {clientes.map(cliente => (
                     <div key={cliente.id} className="col-md-4">
-                        <ClienteCard cliente={cliente} onUpdate={fetchClientes} />
+                        <ClientesCard cliente={cliente} onUpdate={fetchClientes} />
                     </div>
                 ))}
             </div>

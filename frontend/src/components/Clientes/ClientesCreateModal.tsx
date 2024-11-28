@@ -48,7 +48,15 @@ const ClientesCreateModal = ({ onClose, onCreate }: { onClose: () => void; onCre
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5>Criar Cliente</h5>
-                        <button className="btn btn-danger" onClick={onClose}>X</button>
+                        <button
+                            type="button"
+                            className="btn btn-danger"
+                            style={{ position: 'absolute', top: '10px', right: '10px' }}
+                            onClick={onClose}
+                            aria-label="Close"
+                        >
+                            X
+                        </button>
                     </div>
                     <div className="modal-body">
                         <input
