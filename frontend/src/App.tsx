@@ -5,8 +5,9 @@ import Home from './components/Home';
 import Dashboard from './components/Dashboard';
 import Clientes from './components/Clientes/Clientes';
 import Carros from './components/Carros/Carros';
-import Tickets from './components/Tickets';
-import Vagas from './components/Vagas';
+import Estadias from './components/Estadias/Estadias';
+import Tickets from './components/Tickets/Tickets';
+import Vagas from './components/Vagas/Vagas';
 import ProtectRoute from './components/ProtectRoute';
 import PublicRoute from './components/PublicRoute';
 
@@ -54,10 +55,11 @@ const App: React.FC = () => {
                             <Dashboard />
                         </ProtectRoute>
                     }>
-                        <Route path="clientes" element={<Clientes />} />
-                        <Route path="carros" element={<Carros />} />
                         <Route path="tickets" element={<Tickets />} />
+                        <Route path="estadias" element={<Estadias />} />
                         <Route path="vagas" element={<Vagas />} />
+                        <Route path="carros" element={<Carros />} />
+                        <Route path="clientes" element={<Clientes />} />
                     </Route>
                 </Routes>
             </BackgroundWrapper>
